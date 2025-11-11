@@ -9,6 +9,9 @@ Unity ile yapılmış 2D fizik tabanlı araba oyunu. Dağlık arazilerde saçma 
 - 💥 Ölüm sistemi (devrilme, kafa çarpması)
 - 📊 Mesafe ve hız göstergesi
 - 🎮 Basit kontroller
+- 💰 Unity Ads entegrasyonu (Banner, Interstitial, Rewarded Video)
+- 📱 Mobil ve PC platformlar için hazır
+- 🎁 Rewarded video ile continue sistemi
 
 ## Kurulum
 
@@ -132,6 +135,7 @@ Unity ile yapılmış 2D fizik tabanlı araba oyunu. Dağlık arazilerde saçma 
 - `GameManager.cs`: Oyun durumu yönetimi
 - `UIManager.cs`: UI güncellemeleri
 - `WheelController.cs`: Tekerlek görsellerinin dönmesi
+- `AdManager.cs`: Unity Ads entegrasyonu ve reklam yönetimi
 
 ### İyileştirmeler İçin Fikirler
 
@@ -158,8 +162,61 @@ Unity ile yapılmış 2D fizik tabanlı araba oyunu. Dağlık arazilerde saçma 
 - Canvas Render Mode'unun "Screen Space - Overlay" olduğunu kontrol edin
 - UI Manager'da referansların doğru bağlandığını kontrol edin
 
+## Monetization (Para Kazanma) 💰
+
+Oyun Unity Ads sistemi ile entegre edilmiştir:
+
+### Reklam Tipleri
+1. **Banner Ads**: Ekranın alt/üst kısmında sürekli gösterilir
+2. **Interstitial Ads**: Her 3 ölümde bir tam ekran reklam
+3. **Rewarded Video**: Continue için ödüllü video reklam (EN KARLI!)
+
+### Kurulum
+1. [Unity Dashboard](https://dashboard.unity3d.com/) üzerinden proje oluşturun
+2. Android ve iOS Game ID'lerini alın
+3. Unity Editor'de `AdManager` GameObject'ini oluşturun
+4. Game ID'leri AdManager'a girin
+5. Test Mode'u aktifleştirip test edin
+
+**Detaylı bilgi için**: [MONETIZATION.md](MONETIZATION.md) dosyasına bakın
+
+### Gelir Tahmini
+- 1,000 aktif kullanıcı: ~$1,000-2,000/ay
+- 10,000 aktif kullanıcı: ~$10,000-20,000/ay
+- 100,000 aktif kullanıcı: ~$100,000-200,000/ay
+
+## Deployment (Yayınlama) 📱💻
+
+Oyun mobil ve PC platformlarına yayınlanabilir:
+
+### Mobil Platformlar
+- **Android**: Google Play Store ($25 kayıt ücreti)
+- **iOS**: Apple App Store ($99/yıl)
+
+### PC Platformlar
+- **Itch.io**: Ücretsiz, anında yayın (başlangıç için önerilir!)
+- **Steam**: $100 Steam Direct ücreti
+- **Epic Games Store**: Ücretsiz (küratörlü)
+
+**Detaylı build rehberi için**: [DEPLOYMENT.md](DEPLOYMENT.md) dosyasına bakın
+
+### Hızlı Başlangıç
+1. `File > Build Settings`
+2. Platform seçin (Android/iOS/PC)
+3. `Switch Platform`
+4. `Player Settings` ayarlayın
+5. `Build` veya `Build and Run`
+
+**Önemli**: Build almadan önce `AdManager > Test Mode = false` yapın!
+
+## Dökümanlar
+
+- [SETUP.md](SETUP.md) - Unity'de oyunu adım adım kurma rehberi
+- [DEPLOYMENT.md](DEPLOYMENT.md) - Mobil ve PC için build ve yayınlama rehberi
+- [MONETIZATION.md](MONETIZATION.md) - Reklam sistemi ve para kazanma stratejileri
+
 ## Lisans
 
 Bu proje eğitim amaçlıdır. Özgürce kullanabilirsiniz!
 
-## Keyifli Oyunlar! 🎮🚗
+## Keyifli Oyunlar ve Bol Kazançlar! 🎮🚗💰

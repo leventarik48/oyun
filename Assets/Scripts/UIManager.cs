@@ -12,9 +12,12 @@ public class UIManager : MonoBehaviour
     public GameObject gameOverPanel;
     public Text gameOverDistanceText;
     public Text gameOverMessageText;
+    public Button continueButton;
+    public Text continueButtonText;
 
     [Header("References")]
     public CarController carController;
+    public GameManager gameManager;
 
     private bool gameOverShown = false;
 
@@ -30,6 +33,16 @@ public class UIManager : MonoBehaviour
 
         if (carController == null)
             carController = FindObjectOfType<CarController>();
+
+        if (gameManager == null)
+            gameManager = FindObjectOfType<GameManager>();
+
+        // Setup continue button
+        if (continueButton != null)
+        {
+            continueButton.onClick.AddListener(OnContinueButtonClicked);
+            continueButton.gameObject.SetActive(false);
+        }
     }
 
     void Update()
@@ -55,7 +68,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void ShowGameOver(float finalDistance)
+    public void ShowGameOver(float finalDistance, bool canContinue = false)
     {
         if (gameOverShown) return;
         gameOverShown = true;
@@ -73,12 +86,42 @@ public class UIManager : MonoBehaviour
 
         if (gameOverMessageText != null)
         {
-            string message = GetDeathMessage(finalDistance);
+            string message = GetDeathMessage(finalDistance, canContinue);
             gameOverMessageText.text = message;
+        }
+
+        // Show/hide continue button
+        if (continueButton != null)
+        {
+            continueButton.gameObject.SetActive(canContinue);
+
+            if (canContinue && continueButtonText != null)
+            {
+                continueButtonText.text = "Watch Ad to Continue";
+            }
         }
     }
 
-    string GetDeathMessage(float distance)
+    public void HideGameOver()
+    {
+        gameOverShown = false;
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
+        if (gameUI != null)
+            gameUI.SetActive(true);
+    }
+
+    void OnContinueButtonClicked()
+    {
+        if (gameManager != null)
+        {
+            gameManager.ContinueWithAd();
+        }
+    }
+
+    string GetDeathMessage(float distance, bool canContinue)
     {
         string[] messages = {
             "Saçma sapan hareketler yaptın!",
@@ -93,6 +136,14 @@ public class UIManager : MonoBehaviour
             "Hill Climb şampiyonu olamadın!"
         };
 
-        return messages[Random.Range(0, messages.Length)] + "\n\nPress R to Restart\nPress ESC to Quit";
+        string baseMessage = messages[Random.Range(0, messages.Length)];
+        string controls = "\n\nPress R to Restart";
+
+        if (!canContinue)
+        {
+            controls += "\nPress ESC to Quit";
+        }
+
+        return baseMessage + controls;
     }
 }
